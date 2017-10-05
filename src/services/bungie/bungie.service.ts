@@ -9,7 +9,7 @@ import {JwtHelper} from "angular2-jwt";
 
 
 @Injectable()
-export class BungieApi {
+export class BungieService {
   private client_secret: string = 'X7HR205k0rFDYzr7F5lTuObL5DOqd1OHppN4.s9oLNY';
   private client_id: string = '21542';
   private redirect_uri: string = 'https://localhost/callback';

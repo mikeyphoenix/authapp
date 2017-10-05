@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { BungieApi } from './../../services/bungie.service';
+import { BungieAuth } from './../../services/bungie/bungie.auth';
 import { HomePage } from '../home/home';
+import { BungieUser } from '../../services/bungie/bungie.user';
 
 /**
  * Generated class for the LoginPage page.
@@ -17,14 +18,18 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
 
-  constructor(private api: BungieApi, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private bungieAuth: BungieAuth, private bungieUser: BungieUser, public navCtrl: NavController, public navParams: NavParams) {
     // check if the user is already authenticated
-    this.api.isAuthenticated().subscribe((isAuth) => {
+    this.bungieAuth.isAuthenticated().subscribe((isAuth) => {
       if (isAuth) {
-        alert('Authenticated: ');
+        // alert('Authenticated: ' + this.bungieAuth.getAuthorization());
+        if(this.bungieAuth.getAuthorization()) {
+          console.log('Authenticated: ' + this.bungieAuth.getAuthorization().getAccessToken());
+          // alert('Welcome : ' + this.bungieUser.getUserByMemberId(this.bungieAuth.getAuthorization().getMemberId()));
+        }
         this.navCtrl.setRoot(HomePage);
       }else {
-        alert('NOT Authenticated: ');
+        //alert('NOT Authenticated: ');
       }
     // else relax!
     });
@@ -35,7 +40,8 @@ export class LoginPage {
   }
 
   auth() {
-    this.api.auth().subscribe((isAuthSuccess) => {
+    this.bungieAuth.auth().subscribe((isAuthSuccess) => {
+
       this.navCtrl.setRoot(HomePage);
     }, function(e) {
       // handle this in a user friendly way.
