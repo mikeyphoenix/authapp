@@ -16,6 +16,7 @@ import {BungieUser} from '../services/bungie/bungie.user';
 import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { UserService } from '../services/user/user.service';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BungieAuth, BungieUser, BungieApi, Authorization, User
+    BungieAuth, BungieUser, BungieApi, Authorization, User,
+    UserService
   ]
 })
 export class AppModule {}

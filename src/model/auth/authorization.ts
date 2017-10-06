@@ -25,9 +25,12 @@ export class Authorization {
   public static parseFromJSONObject(jsonObject) : Authorization {
     const model = this.getNewInstance();
     if (jsonObject) {
-
+      model.setAccessToken(jsonObject.accessToken);
+      model.setAccessTokenExpiry(jsonObject.accessTokenExpiry);
+      model.setRefreshToken(jsonObject.refreshToken);
+      model.setRefreshTokenExpiry(jsonObject.refreshTokenExpiry);
+      model.setMemberId(jsonObject.memberId);
     }
-
     return model;
   }
 
